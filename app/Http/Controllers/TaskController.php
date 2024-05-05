@@ -9,6 +9,13 @@ use App\Http\Controllers\Controller;
 
 class TaskController extends Controller
 {
+
+    public function login(){
+        return view('tasks.login');
+    }
+    public function register(){
+        return view('tasks.register');
+    }
     public function index(){
         $tasks = Task::all();
         return view('tasks.index',['tasks' => $tasks]);
@@ -17,7 +24,7 @@ class TaskController extends Controller
     public function create(){
         return view('tasks.create');
     }
-    
+
     public function store(Request $request){
        $data = $request->validate([
         'Title' => 'required',
