@@ -27,7 +27,7 @@
         }
         .unclickable {
     pointer-events: none;
-    color: #c7bbbb; /* Optional: Change the color to indicate that the button is disabled */
+    color: #c7bbbb; /* Optional: Change the color to indicate that the button is disabled hyeeee*/ 
 }
 
     </style>
