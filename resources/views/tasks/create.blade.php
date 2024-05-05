@@ -6,10 +6,10 @@
         <title>ToDoLIST</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     </head>
-    <body class="font-sans antialiased bg-blue-300 h-screen pl-5 pt-5">
-        <div class="min-h-screen flex flex-col items-center justify-center">
-            <div class="bg-white p-6 rounded-lg shadow-lg border-solid border-2 border-black">
-                <h1 class="text-3xl font-bold mb-4">CREATE</h1>
+    <body class="font-sans antialiased leading-normal tracking-wider bg-gradient-to-b from-blue-500 to-sky-500 h-screen flex items-center justify-center pt-80">
+        <<div class="min-h-screen flex flex-col items-start justify-start pt-6 px-32  w-full">
+            <div class="bg-blue-300 border-2 border-black p-6 rounded-lg shadow-lg w-2/5 mx-auto h-auto ">
+                <h1 class="text-3xl font-bold mb-4 text-black">Create Task</h1>
                 <form method="post" action="{{route('task.store')}}">
                     @csrf
                     @method('post')
@@ -24,11 +24,11 @@
                     
    
                     <div>
-                        <input type="submit" value="Save a New Task" class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
+                        <input type="submit" value="Save a New Task" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-200">
                     </div>
                 </form>
                 <div style="text-align: right;" class="mt-4">
-                    <a href="{{ route('task.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">
+                    <a href="{{ route('task.index') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded">
                         Cancel
                     </a>
                 </div>

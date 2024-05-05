@@ -42,7 +42,7 @@ class TaskController extends Controller
         $data = $request->validate([
             'Title' => 'required',
             'Description' => 'required',
-            'Completed' => 'required|boolean'
+           
         ]);
 
         $task = Task::find($id);
@@ -83,6 +83,20 @@ class TaskController extends Controller
     $tasks = Task::where('Completed', 1)->get();
     return view('tasks.index', ['tasks' => $tasks]);
 }
+public function getStarStatus($id)
+{
+    $task = Task::find($id);
+    if (!$task) {
+        return response()->json(['error' => 'Task not found'], 404);
+    }
 
-
+    return response()->json(['starFilled' => $task->Priority]); // Assuming Priority field indicates star status
 }
+public function showUnfinished()
+{
+    $tasks = Task::where('Completed', 0)->get();
+    return view('tasks.index', ['tasks' => $tasks]);
+}
+
+
+};
