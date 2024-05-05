@@ -22,15 +22,16 @@
                         <textarea name="Description" rows="4" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="Your Description" required></textarea>
                     </div>
                     
-                    <div class="mb-4">
-                        <label for="completed" class="block text-gray-700 font-bold">Completed?</label>
-                        <input type="radio" name="Completed" value="1"> Finished
-                        <input type="radio" name="Completed" value="0"> Unfinished
-                    </div>
+   
                     <div>
                         <input type="submit" value="Save a New Task" class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
                     </div>
                 </form>
+                <div style="text-align: right;" class="mt-4">
+                    <a href="{{ route('task.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">
+                        Cancel
+                    </a>
+                </div>
             </div>
         </div>
     </body>

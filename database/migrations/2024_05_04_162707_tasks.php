@@ -17,6 +17,7 @@ return new class extends Migration
                 $table->string('Title');
                 $table->string('Description');
                 $table->boolean('Completed')->default(false);
+                $table->boolean('Priority')->default(false);
                 $table->timestamps();
             });
         }

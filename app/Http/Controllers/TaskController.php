@@ -6,52 +6,82 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
 class TaskController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $tasks = Task::all();
-        return view('tasks.index',['tasks' => $tasks]);
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('tasks.create');
     }
-    
-    public function store(Request $request){
-       $data = $request->validate([
-        'Title' => 'required',
-        'Description' => 'required',
-        'Completed' => 'required|boolean'
-       ]);
 
-       $newTask = Task::create($data);
-       return redirect(route('task.index'));
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'Title' => 'required',  
+            'Description' => 'required'
+        ]);
+        $data['Completed'] = 0;
+
+        $newTask = Task::create($data);
+        return redirect(route('task.index'));
     }
+
     public function edit($id)
-{
-    $task = Task::find($id);
-    return view('tasks.edit', ['task' => $task]);
-}
+    {
+        $task = Task::find($id);
+        return view('tasks.edit', ['task' => $task]);
+    }
 
-public function update(Request $request, $id)
-{
-    $data = $request->validate([
-        'Title' => 'required',
-        'Description' => 'required',
-        'Completed' => 'required|boolean'
-    ]);
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'Title' => 'required',
+            'Description' => 'required',
+            'Completed' => 'required|boolean'
+        ]);
 
-    $task = Task::find($id);
-    $task->update($data);
-    return redirect(route('task.index'));
-}
+        $task = Task::find($id);
+        $task->update($data);
+        return redirect(route('task.index'));
+    }
 
-public function destroy($id)
+    public function destroy($id)
+    {
+        $task = Task::find($id);
+        $task->delete();
+        return redirect(route('task.index'));
+    }
+
+    public function toggleComplete($id, Request $request)
+    {
+        $task = Task::find($id);
+        $task->Completed = $request->input('completed');
+        $task->save();
+
+        return response()->json(['success' => 'Task completion status updated']);
+    }
+    public function togglePriority($id)
+    {
+        $task = Task::find($id);
+        $task->Priority = !$task->Priority; // Toggle priority status
+        $task->save();
+    
+        return redirect(route('task.index'));
+    }
+    public function showPriority()
+    {
+        $tasks = Task::where('Priority', 1)->get();
+        return view('tasks.index', ['tasks' => $tasks]);
+    }
+    public function showCompleted()
 {
-    $task = Task::find($id);
-    $task->delete();
-    return redirect(route('task.index'));
+    $tasks = Task::where('Completed', 1)->get();
+    return view('tasks.index', ['tasks' => $tasks]);
 }
 
 
